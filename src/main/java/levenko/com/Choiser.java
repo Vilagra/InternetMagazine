@@ -16,7 +16,7 @@ public class Choiser {
         String flag ="";
         Scanner sc= new Scanner(System.in);
         while(!flag.equals("4")) {
-            System.out.println("Welcome in Internet Shop");
+            System.out.println("Welcome in internet shop");
             System.out.println("Press '1' if you want to see list of products");
             System.out.println("Press '2' if you want to add products in basket");
             System.out.println("Press '3' if you want to see what stored in your basket");
