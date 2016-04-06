@@ -1,4 +1,4 @@
-package levenko.com;
+package levenko.com.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,16 +14,15 @@ public class DBConnect {
 
     private Connection connection;
 
-    public DBConnect(){
+    public Connection getConnection() {
         try{
             connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return  connection;
     }
-
-    public Connection getConnection() {return connection;}
 
 
 }

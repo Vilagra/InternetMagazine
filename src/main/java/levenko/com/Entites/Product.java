@@ -1,4 +1,4 @@
-package levenko.com;
+package levenko.com.Entites;
 
 /**
  * Created by Vilagra on 28.03.2016.
@@ -6,7 +6,7 @@ package levenko.com;
 public class Product {
     private int id;
     private int price;
-    private String nameOfProduct;
+    private String name;
 
     public int getId() {
         return id;
@@ -16,8 +16,8 @@ public class Product {
         return price;
     }
 
-    public String getNameOfProduct() {
-        return nameOfProduct;
+    public String getName() {
+        return name;
     }
 
     public void setId(int id) {
@@ -28,14 +28,14 @@ public class Product {
         this.price = price;
     }
 
-    public void setNameOfProduct(String nameOfProduct) {
-        this.nameOfProduct = nameOfProduct;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Product(int id, int price, String nameOfProduct) {
+    public Product(int id, int price, String name) {
         this.id = id;
         this.price = price;
-        this.nameOfProduct = nameOfProduct;
+        this.name = name;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Product {
 
         if (id != product.id) return false;
         if (price != product.price) return false;
-        return nameOfProduct != null ? nameOfProduct.equals(product.nameOfProduct) : product.nameOfProduct == null;
+        return name != null ? name.equals(product.name) : product.name == null;
 
     }
 
@@ -55,7 +55,7 @@ public class Product {
     public int hashCode() {
         int result = id;
         result = 31 * result + price;
-        result = 31 * result + (nameOfProduct != null ? nameOfProduct.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
@@ -63,7 +63,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", nameOfProduct='" + nameOfProduct +
+                ", name='" + name +
                 "', price=" + price +
                 '}';
     }
