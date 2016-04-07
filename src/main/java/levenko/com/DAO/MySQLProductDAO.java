@@ -13,9 +13,9 @@ import java.util.List;
  * Created by Vilagra on 05.04.2016.
  */
 public class MySQLProductDAO {
-    private static final String SQL_FIND_PRODUCTS = "SELECT * FROM score";
-    private static final String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM score WHERE id=?";
-    private static final String SQL_FIND_PRODUCT_BY_NAME = "SELECT * FROM score WHERE Product=?";
+    private static final String SQL_FIND_PRODUCTS = "SELECT * FROM products";
+    private static final String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM products WHERE id=?";
+    private static final String SQL_FIND_PRODUCT_BY_NAME = "SELECT * FROM products WHERE name=?";
 
 
 
