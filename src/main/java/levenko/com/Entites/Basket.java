@@ -24,6 +24,9 @@ public class Basket {
         else{
             productsINBasket.put(product,amount);
         }
+
+
+
     }
 
     public void seeAllProductsInBasket(){

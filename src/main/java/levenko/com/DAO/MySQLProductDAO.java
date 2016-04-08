@@ -59,7 +59,6 @@ public class MySQLProductDAO {
         try {
             PreparedStatement pstmt = connect.getConnection().prepareStatement(SQL_FIND_PRODUCT_BY_NAME);
             pstmt.setString(1, name);
-            System.out.println(pstmt);
             ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 product = new Product(resultSet.getInt(1), resultSet.getInt(3), resultSet.getString(2));

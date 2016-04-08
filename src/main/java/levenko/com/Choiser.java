@@ -34,7 +34,13 @@ public class Choiser {
                     String name = sc.next();
                     System.out.print("Enter amount: ");
                     Integer ammount =sc.nextInt();
-                    basket.addProductInBasket(store.getProductByName(name),ammount);
+                    Product product = store.getProductByName(name);
+                    if(product!=null) {
+                        basket.addProductInBasket(store.getProductByName(name), ammount);
+                    }
+                    else{
+                        System.out.println("incorrect name");
+                    }
                     System.out.println();
                     break;
                 case "3":
