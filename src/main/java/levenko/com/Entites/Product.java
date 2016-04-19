@@ -45,25 +45,19 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (id != product.id) return false;
-        if (price != product.price) return false;
-        return name != null ? name.equals(product.name) : product.name == null;
+        return id == product.id;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + price;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", name='" + name +
+                "name='" + name +
                 "', price=" + price +
                 '}';
     }

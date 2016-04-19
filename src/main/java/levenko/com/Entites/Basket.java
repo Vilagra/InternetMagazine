@@ -2,6 +2,7 @@ package levenko.com.Entites;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Vilagra on 05.04.2016.
@@ -13,9 +14,6 @@ public class Basket {
         return productsINBasket;
     }
 
-    public void setProductsINBasket(Map<Product, Integer> productsINBasket, Product p, int amount) {
-        this.productsINBasket = productsINBasket;
-    }
 
     public void addProductInBasket(Product product,Integer amount){
         if(productsINBasket.containsKey(product)){
@@ -30,10 +28,10 @@ public class Basket {
     }
 
     public void seeAllProductsInBasket(){
-        for (Product product : productsINBasket.keySet()) {
-            System.out.println(product.getName() + " ammount: "+ productsINBasket.get(product));
+        for (Map.Entry set: productsINBasket.entrySet()) {
+            System.out.println(set.getKey() + " ammount: "+ set.getValue());
         }
-
+        productsINBasket.entrySet();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package levenko.com;
 
-import levenko.com.DAO.DBConnect;
+
 import levenko.com.Entites.Product;
 
 import java.sql.ResultSet;

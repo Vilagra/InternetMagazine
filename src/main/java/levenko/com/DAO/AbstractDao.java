@@ -7,7 +7,8 @@ import java.sql.SQLException;
 /**
  * Created by Vilagra on 28.03.2016.
  */
-public class DBConnect {
+
+public abstract class AbstractDao {
     private static final String URL = "jdbc:mysql://localhost:3306/mywebshop?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";

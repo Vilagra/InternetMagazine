@@ -1,5 +1,6 @@
 package levenko.com;
 
+import levenko.com.DAO.MySQLProductDAO;
 import levenko.com.Entites.Basket;
 import levenko.com.Entites.Product;
 
@@ -12,7 +13,7 @@ public class Choiser {
 
     public void workWithBasket(){
         Basket basket = new Basket();
-        Store store = new Store();
+        MySQLProductDAO productService = new MySQLProductDAO();
         String flag ="";
         Scanner sc= new Scanner(System.in);
         while(!flag.equals("4")) {
@@ -25,18 +26,18 @@ public class Choiser {
             flag = sc.next();
             switch(flag){
                 case "1":
-                    store.seeAllProducts();
+                    System.out.println(productService.getAllProducts());
                     break;
                 case "2":
                     System.out.println("Choice product:");
-                    store.seeAllProducts();
+                    System.out.println(productService.getAllProducts());
                     System.out.print("Enter name of product: ");
                     String name = sc.next();
                     System.out.print("Enter amount: ");
                     Integer ammount =sc.nextInt();
-                    Product product = store.getProductByName(name);
+                    Product product = productService.getProductByName(name);
                     if(product!=null) {
-                        basket.addProductInBasket(store.getProductByName(name), ammount);
+                        basket.addProductInBasket(productService.getProductByName(name), ammount);
                     }
                     else{
                         System.out.println("incorrect name");
