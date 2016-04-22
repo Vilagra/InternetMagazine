@@ -27,7 +27,8 @@ public class MySQLProductDAO extends AbstractDao {
                 listAllProductsWithBD.add(product);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Problem with connectDB");
+            System.out.println(e);
         }
         return listAllProductsWithBD;
     }

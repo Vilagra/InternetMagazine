@@ -9,11 +9,15 @@ import java.util.Map;
 /**
  * Created by Vilagra on 06.04.2016.
  */
-public class Order {
+public class OrderCalculate {
+    public Map<Product, Integer> getProductsInBasket() {
+        return ProductsInBasket;
+    }
+
     private Map<Product, Integer> ProductsInBasket = new HashMap<>();
     int totalPrice;
 
-    public Order(Basket basket) {
+    public OrderCalculate(Basket basket) {
         this.ProductsInBasket = basket.getProductsINBasket();
         totalPrice = calculateOrder();
     }

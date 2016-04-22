@@ -22,9 +22,6 @@ public class Basket {
         else{
             productsINBasket.put(product,amount);
         }
-
-
-
     }
 
     public void seeAllProductsInBasket(){
@@ -32,6 +29,10 @@ public class Basket {
             System.out.println(set.getKey() + " ammount: "+ set.getValue());
         }
         productsINBasket.entrySet();
+    }
+
+    public void cleanOutBasket(){
+        productsINBasket = new LinkedHashMap<>();
     }
 
     @Override

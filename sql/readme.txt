@@ -8,5 +8,3 @@ cd ...\MySQL\MySQL Server 5.7\bin
 > CREATE DATABASE mywebshop;
 
 > SOURCE ...(your path from 'my webshopDB creation script.sql')
-for example:
-> SOURCE C:\InternetMagazine\src\sql\my webshopDB creation script.sql
