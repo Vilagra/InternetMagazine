@@ -18,6 +18,7 @@ public class Choiser {
         Basket basket = new Basket();
         String flag ="";
         Scanner sc= new Scanner(System.in);
+        ProductService productService = new ProductService();
         while(!flag.equals("5")) {
             System.out.println("Welcome in internet shop");
             System.out.println("Press '1' if you want to see list of products");
@@ -29,21 +30,28 @@ public class Choiser {
             flag = sc.next();
             switch(flag){
                 case "1":
-                    System.out.println(new ProductService().getAllProduct());
+                    System.out.println(productService.getAllProduct());
                     break;
                 case "2":
                     System.out.println("Choice product:");
-                    System.out.println(new ProductService().getAllProduct());
+                    System.out.println(productService.getAllProduct());
                     System.out.print("Enter name of product: ");
                     String name = sc.next();
                     System.out.print("Enter amount: ");
                     Integer ammount =sc.nextInt();
-                    Product product = new ProductService().getProductByName(name);
+                    Product product = productService.getProductByName(name);
                     if(product!=null) {
-                        basket.addProductInBasket(new ProductService().getProductByName(name), ammount);
+                        basket.addProductInBasket(productService.getProductByName(name), ammount);
                     }
                     else{
                         System.out.println("incorrect name");
+                        if((product=productService.getProductWithMisspelling(name))!=null){
+                            System.out.println("May be you meant "+ product.getName()+"? Add it to the basket? Please enter 'y' if yes or 'n' if no");
+                            String flag1 = sc.next();
+                            if(flag1.charAt(0)=='y'){
+                                basket.addProductInBasket(product,ammount);
+                            }
+                        }
                     }
                     System.out.println();
                     break;

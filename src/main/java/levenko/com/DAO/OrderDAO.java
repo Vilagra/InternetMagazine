@@ -72,6 +72,7 @@ public class OrderDAO extends AbstractDao{
             ResultSet rs=statement.executeQuery(SQL_LAST_ID);
             rs.next();
             last_id = rs.getInt(1);
+            System.out.println(last_id);
         } catch (SQLException e) {
             System.out.println("Error in work DB");
             System.out.println(e);
