@@ -1,8 +1,6 @@
 package levenko.com.DAO;
 
-import com.mysql.jdbc.MySQLConnection;
 import levenko.com.Entites.Product;
-import sun.rmi.runtime.Log;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,14 +9,14 @@ import java.util.List;
 /**
  * Created by Vilagra on 05.04.2016.
  */
-public class MySQLProductDAO extends AbstractDao {
+public class ProductDAO extends AbstractDao {
     private static final String SQL_FIND_PRODUCTS = "SELECT * FROM products";
     private static final String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM products WHERE id=?";
     private static final String SQL_FIND_PRODUCT_BY_NAME = "SELECT * FROM products WHERE name=?";
 
 
     public List<Product> getAllProducts() {
-        Connection connect = new MySQLProductDAO().getConnection();
+        Connection connect = new ProductDAO().getConnection();
         List<Product> listAllProductsWithBD = new ArrayList<>();
         try (Statement statment = connect.createStatement();
              ResultSet resultSet = statment.executeQuery(SQL_FIND_PRODUCTS)) {
@@ -39,7 +37,7 @@ public class MySQLProductDAO extends AbstractDao {
         ResultSet resultSet = null;
         Product product = null;
         try {
-            connect = new MySQLProductDAO().getConnection();
+            connect = new ProductDAO().getConnection();
             pstmt = connect.prepareStatement(SQL_FIND_PRODUCT_BY_ID);
             pstmt.setString(1, id + "");
             resultSet = pstmt.executeQuery();
@@ -70,7 +68,7 @@ public class MySQLProductDAO extends AbstractDao {
         ResultSet resultSet = null;
         Product product = null;
         try {
-            connect = new MySQLProductDAO().getConnection();
+            connect = new ProductDAO().getConnection();
             pstmt = connect.prepareStatement(SQL_FIND_PRODUCT_BY_NAME);
             pstmt.setString(1, name);
             resultSet = pstmt.executeQuery();

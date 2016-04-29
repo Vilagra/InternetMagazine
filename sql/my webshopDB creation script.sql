@@ -1,7 +1,9 @@
 USE mywebshop;
 
+DROP TABLE IF EXISTS orders_products;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS orders;
+
 
 
 -- ------------
@@ -31,12 +33,18 @@ CREATE TABLE orders (
   UNIQUE INDEX id_UNIQUE (id ASC)
 );
 
+INSERT INTO orders VALUES(DEFAULT,'2016-03-15 00:00:00');
+INSERT INTO orders VALUES(DEFAULT,'2016-04-02 00:00:00');
+INSERT INTO orders VALUES(DEFAULT,'2016-04-07 00:00:00');
+INSERT INTO orders VALUES(DEFAULT,'2016-04-15 00:00:00');
+
 -- --------------
 -- orders_product
 -- --------------
 CREATE TABLE orders_products (
     order_id INT NOT NULL,
     product_id INT NOT NULL,
+    product_price INT NOT NULL,
     product_count INT NOT NULL,
     PRIMARY KEY (order_id,product_id),
     CONSTRAINT FK_ORDER_ID  FOREIGN KEY (order_id) REFERENCES orders(id),
@@ -45,6 +53,18 @@ CREATE TABLE orders_products (
 );
 
 
+INSERT INTO orders_products VALUES(1,2,12,2);
+INSERT INTO orders_products VALUES(1,3,17,2);
+INSERT INTO orders_products VALUES(2,2,12,2);
+INSERT INTO orders_products VALUES(2,4,28,3);
+INSERT INTO orders_products VALUES(3,2,14,2);
+INSERT INTO orders_products VALUES(3,1,10,15);
+INSERT INTO orders_products VALUES(3,4,28,4);
+INSERT INTO orders_products VALUES(4,3,18,4);
+
+
 
 SELECT * FROM products;
+SELECT * FROM orders;
+SELECT * FROM orders_products;
 

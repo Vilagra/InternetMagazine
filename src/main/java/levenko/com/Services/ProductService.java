@@ -1,6 +1,6 @@
 package levenko.com.Services;
 
-import levenko.com.DAO.MySQLProductDAO;
+import levenko.com.DAO.ProductDAO;
 import levenko.com.Entites.Product;
 
 import java.util.List;
@@ -10,22 +10,22 @@ import java.util.List;
  */
 public class ProductService {
 
-    private  MySQLProductDAO mySQLProductDAO;
+    private ProductDAO productDAO;
 
     public ProductService(){
-        mySQLProductDAO = new MySQLProductDAO();
+        productDAO = new ProductDAO();
     }
 
     public List<Product> getAllProduct(){
-        return mySQLProductDAO.getAllProducts();
+        return productDAO.getAllProducts();
     }
 
     public Product getProductByID(int ID){
-        return mySQLProductDAO.getProductByID(ID);
+        return productDAO.getProductByID(ID);
     }
 
     public Product getProductByName(String name){
-        return mySQLProductDAO.getProductByName(name);
+        return productDAO.getProductByName(name);
     }
 
     public Product getProductWithMisspelling(String name){

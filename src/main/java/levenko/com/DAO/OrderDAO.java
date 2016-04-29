@@ -1,6 +1,7 @@
 package levenko.com.DAO;
 
 import levenko.com.Entites.Order;
+import levenko.com.Entites.Product;
 
 import java.sql.*;
 import java.sql.Date;
@@ -14,6 +15,15 @@ public class OrderDAO extends AbstractDao{
     private static final String SQL_GET_ORDERS_BY_ID = "SELECT * FROM orders WHERE id=?";
     private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUES(DEFAULT,?)";
     private static final String SQL_LAST_ID = "SELECT LAST_INSERT_ID()";
+    private static final String SQL_ORDERS_BETWEN_DATES = "SELECT orders.id, orders.date, products.name, products.price, orders_products.product_count " +
+                                                        "FROM orders JOIN orders_products ON orders.id=orders_products.order_id " +
+                                                        "JOIN products ON orders_products.product_id=products.id "+
+                                                        "WHERE orders.date BETWEEN ? AND ? "+
+                                                        "ORDER BY orders.id";
+    private static final String SQL_ORDER_WITH_PRODUCTS_BY_ID = "SELECT orders.id, orders.date, products.name, products.price, orders_products.product_count " +
+            "FROM orders JOIN orders_products ON orders.id=orders_products.order_id " +
+            "JOIN products ON orders_products.product_id=products.id "+
+            "WHERE orders.id=?";
 
 
     public List<Order> getAllOrders() {
@@ -72,12 +82,68 @@ public class OrderDAO extends AbstractDao{
             ResultSet rs=statement.executeQuery(SQL_LAST_ID);
             rs.next();
             last_id = rs.getInt(1);
-            System.out.println(last_id);
         } catch (SQLException e) {
             System.out.println("Error in work DB");
             System.out.println(e);
         }
         return last_id;
+    }
+
+    public Order getOrderWithProductsByID(int id){
+        Order order = new Order();
+        try(Connection connection = new OrderDAO().getConnection();PreparedStatement statement = connection.prepareStatement(SQL_ORDER_WITH_PRODUCTS_BY_ID)) {
+            statement.setInt(1,id);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                if(rs.isFirst()) order = extractOrder(rs);
+                Product product = new ProductDAO().getProductByName(rs.getString(3));
+                product.setPrice(rs.getInt(4));
+                order.addProductWithAmount(product, rs.getInt(5));
+            }
+        }
+            catch (SQLException e){
+            System.out.println("Error in work DB5");
+            System.out.println(e);
+        }
+        return order;
+    }
+    public List<Order> getAllOrdersBetweenDates(Date begin, Date finish){
+        List <Order> orderList = new ArrayList<>();
+        try(Connection connection = new OrderDAO().getConnection();PreparedStatement statement = connection.prepareStatement(SQL_ORDERS_BETWEN_DATES)) {
+            statement.setDate(1, begin);
+            statement.setDate(2, finish);
+            ResultSet rs = statement.executeQuery();
+            int id=0;
+            Order order = new Order();
+            while(rs.next()){
+                if(rs.isFirst()){
+                    id=rs.getInt(1);
+                    order = extractOrder(rs);
+                }
+                if(rs.getInt(1)==id){
+                    Product product = new ProductDAO().getProductByName(rs.getString(3));
+                    product.setPrice(rs.getInt(4));
+                    order.addProductWithAmount(product, rs.getInt(5));
+
+                }
+                else{
+                    orderList.add(order);
+                    id=rs.getInt(1);
+                    order = extractOrder(rs);
+                    Product product = new ProductDAO().getProductByName(rs.getString(3));
+                    product.setPrice(rs.getInt(4));
+                    order.addProductWithAmount(product, rs.getInt(5));
+                }
+                if (rs.isLast()) {
+                    orderList.add(order);
+                }
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Error in work DB5");
+            System.out.println(e);
+        }
+        return orderList;
     }
 
 
@@ -91,6 +157,8 @@ public class OrderDAO extends AbstractDao{
         return order;
 
     }
+
+
 
 
 }
